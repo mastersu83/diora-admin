@@ -1,0 +1,52 @@
+@import "../../scss/variables";
+
+.clothes {
+  padding: 10px 100px;
+  height: 750px;
+  &__title {
+    margin-bottom: 60px;
+    font-size: 40px;
+    text-align: center;
+    color: $mainColor;
+  }
+  &__items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+  }
+  &__item {
+    position: relative;
+  }
+  &__img {
+    width: 231px;
+  }
+  &__boyImg {
+  }
+  &__girlImgBtn {
+    position: absolute;
+    top: 25px;
+    right: -140px;
+  }
+  &__boyImgBtn {
+    position: absolute;
+    bottom: 25px;
+    left: -165px;
+  }
+  &__btn {
+    background-color: #fefdfd;
+    padding: 10px;
+    font-size: 20px;
+    font-family: inherit;
+    border: 1px solid $mainColor;
+    border-radius: 5px;
+    color: $mainColor;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      background-color: #ff85a4;
+      transition: 0.5s;
+    }
+  }
+}

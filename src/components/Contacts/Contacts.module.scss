@@ -1,0 +1,26 @@
+@import "../../scss/variables";
+
+.contacts {
+  padding: 10px 100px;
+  height: 750px;
+  &__title {
+    margin-bottom: 60px;
+    font-size: 40px;
+    text-align: center;
+    color: $mainColor;
+  }
+  &__box {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  &__data {
+    p {
+      font-size: 20px;
+      color: $mainColor;
+    }
+  }
+  &__phone {
+  }
+  &__email {
+  }
+}

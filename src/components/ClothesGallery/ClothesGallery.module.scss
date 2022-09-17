@@ -1,0 +1,32 @@
+@import "../../scss/variables";
+
+.clothesGirl {
+  padding: 10px 100px;
+
+  &__title {
+    margin-bottom: 60px;
+    font-size: 40px;
+    text-align: center;
+    color: $mainColor;
+  }
+  &__items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  &__verticalItems {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+  &__horizontalItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+  &__item {
+    width: 100%;
+  }
+}

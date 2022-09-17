@@ -1,0 +1,13 @@
+.slider {
+  //width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  &__image {
+    position: absolute;
+    width: 305px;
+    top: 935px;
+    left: 410px;
+  }
+}

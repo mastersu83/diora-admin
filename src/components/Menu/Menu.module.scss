@@ -1,0 +1,22 @@
+.menu {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  padding: 20px;
+  column-gap: 10px;
+  &__link {
+    text-decoration: none;
+    border-bottom: 2px solid #d8c7bd;
+    border-top: 2px solid #d8c7bd;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      background-color: #ff85a4;
+      transition: 0.5s;
+    }
+  }
+  &__activeLink {
+    background-color: #dcf4f1;
+  }
+}
