@@ -19,9 +19,13 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isAuth = true;
     },
+    logOut(state: InitialStateType) {
+      state.user = {} as IUser;
+      state.isAuth = false;
+    },
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, logOut } = authSlice.actions;
 
 export default authSlice;

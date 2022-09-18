@@ -1,52 +1,70 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import classes from "./Form.module.scss";
 import { Input } from "./Input";
 import { Button } from "./Button";
-import { useAppDispatch } from "../hooks/appHooks";
-import { useNavigate } from "react-router-dom";
+import { useUploadMutation } from "../services/galleryAPI";
 
 export const AdminPanelForm = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [inputs, setInputs] = useState({
-    type: "",
-    imageUrl: "",
-  });
+  const [inputType, setInputType] = useState("0");
+  const [inputFile, setInputFile] = useState("");
 
-  const onChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
+  const [upload, { data }] = useUploadMutation();
+
+  console.log(data);
+
+  const onChangeType = (e: ChangeEvent<HTMLSelectElement>) => {
+    setInputType(e.target.value);
+  };
+  const onChangeFile = async (e: any) => {
+    setInputFile(e.target.value);
+    try {
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      upload(formData);
+    } catch (err) {
+      console.warn(err);
+      alert("Ошибка при загрузке файла");
+    }
   };
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    setInputs({ type: "", imageUrl: "" });
+    // setInputs({ type: "0", imageUrl: "" });
+    localStorage.removeItem("previewImage");
   };
+
+  useEffect(() => {
+    !localStorage.getItem("previewImage") &&
+      localStorage.setItem("previewImage", data ? data?.url : "");
+  }, [data]);
 
   return (
     <form
       onSubmit={sendEmail}
       className={`${classes.form__adminLogin} ${classes.addImageForm}`}
     >
-      <select name="" id=""></select>
-      <Input
-        onChange={onChange}
+      <select
+        className={classes.form__input}
         name="type"
-        type="textarea"
-        placeholder="Тип файла"
-        value={inputs.type}
-      />
+        onChange={onChangeType}
+      >
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
       <Input
-        onChange={onChange}
+        onChange={onChangeFile}
         file
         name="file"
         type="file"
         placeholder="Ваш Пароль"
-        value={inputs.imageUrl}
       />
+      <div className={classes.previewImage}>
+        <img
+          src={`http://localhost:5000/uploads${inputFile.split("")}`}
+          alt=""
+        />
+      </div>
+
       <Button text="Отправить" />
     </form>
   );

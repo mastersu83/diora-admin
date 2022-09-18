@@ -39,6 +39,7 @@ export const ContactsForm = () => {
         type="text"
         placeholder="Ваше имя"
         value={inputs.name}
+        input
       />
       <Input
         onChange={onChange}
@@ -46,6 +47,7 @@ export const ContactsForm = () => {
         type="email"
         placeholder="Ваш Email"
         value={inputs.email}
+        input
       />
       <Input
         onChange={onChange}
@@ -53,6 +55,7 @@ export const ContactsForm = () => {
         type="text"
         placeholder="Тема сообщения"
         value={inputs.subject}
+        input
       />
       <Input
         onChange={onChange}

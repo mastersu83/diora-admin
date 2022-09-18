@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classes from "./App.module.scss";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Slider from "./components/Slider/Slider";
 import ClothesGallery from "./components/ClothesGallery/ClothesGallery";
@@ -18,8 +18,6 @@ function App() {
   const { isAuth } = useAppSelector((state) => state.auth);
 
   const { data } = useAuthQuery({});
-
-  console.log(isAuth);
 
   useEffect(() => {
     if (data) {

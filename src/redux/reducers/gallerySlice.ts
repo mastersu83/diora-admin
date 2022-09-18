@@ -9,6 +9,7 @@ type InitialStateType = {
   title: string;
   sliderImages: ImageTypes[];
   sliderImagesIsSuccess: boolean;
+  previewImage: string;
 };
 
 const initialState: InitialStateType = {
@@ -18,6 +19,7 @@ const initialState: InitialStateType = {
   title: "",
   sliderImages: [],
   sliderImagesIsSuccess: false,
+  previewImage: "",
 };
 
 const gallerySlice = createSlice({
@@ -26,6 +28,12 @@ const gallerySlice = createSlice({
   reducers: {
     setTitle(state: InitialStateType, action: PayloadAction<string>) {
       state.title = action.payload;
+    },
+    setPreviewImage(
+      state: InitialStateType,
+      action: PayloadAction<ImageTypes>
+    ) {
+      state.previewImage = action.payload.url;
     },
   },
   extraReducers: {
@@ -56,6 +64,6 @@ const gallerySlice = createSlice({
   },
 });
 
-export const { setTitle } = gallerySlice.actions;
+export const { setTitle, setPreviewImage } = gallerySlice.actions;
 
 export default gallerySlice;

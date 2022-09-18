@@ -1,17 +1,22 @@
 @import "../scss/variables";
 
 .form {
-  height: 100vh;
   &__adminLogin {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
+    margin-top: 30px;
   }
 
   &__contacts {
     display: flex;
     flex-direction: column;
     align-items: end;
+  }
+
+  &__fileInput {
+    margin-bottom: 10px;
   }
 
   &__input {
@@ -61,5 +66,13 @@
   .form__inputFile {
     border: none;
     width: 550px;
+    margin: 20px 0;
+  }
+}
+
+.previewImage {
+  width: 550px;
+  img {
+    width: 100%;
   }
 }

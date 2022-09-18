@@ -8,9 +8,10 @@ interface InputPropsTypes {
   name: string;
   type: string;
   placeholder: string;
-  value: string;
+  value?: string;
   textarea?: boolean;
   file?: boolean;
+  input?: boolean;
 }
 
 export const Input: FC<InputPropsTypes> = ({
@@ -21,12 +22,13 @@ export const Input: FC<InputPropsTypes> = ({
   onChange,
   textarea,
   file,
+  input,
 }) => {
   return (
     <>
-      {!textarea ? (
+      {input && (
         <input
-          className={`${!file ? classes.form__input : classes.form__inputFile}`}
+          className={`${classes.form__input}`}
           onChange={(e) => onChange(e)}
           name={name}
           type={type}
@@ -34,13 +36,24 @@ export const Input: FC<InputPropsTypes> = ({
           value={value}
           required
         />
-      ) : (
+      )}
+
+      {textarea && (
         <textarea
           className={classes.form__textarea}
           onChange={(e) => onChange(e)}
           name={name}
           placeholder={placeholder}
           value={value}
+          required
+        />
+      )}
+      {file && (
+        <input
+          className={`${classes.form__inputFile}`}
+          onChange={(e) => onChange(e)}
+          name={name}
+          type={type}
           required
         />
       )}

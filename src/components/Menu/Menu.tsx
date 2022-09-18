@@ -1,13 +1,14 @@
 import React from "react";
 import classes from "./Menu.module.scss";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/appHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
 import { getImages } from "../../services/galleryAPI";
 import { getPathName } from "../../utils/utils";
 import { setTitle } from "../../redux/reducers/gallerySlice";
 
 const Menu = () => {
   const dispatch = useAppDispatch();
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   const getOthersImages = (key: string | undefined) => {
     let { path, title } = getPathName(key);
@@ -41,12 +42,25 @@ const Menu = () => {
       >
         <li className={classes.menu__link}>КОНТАКТЫ</li>
       </NavLink>
-      <NavLink
-        to="login"
-        className={({ isActive }) => (isActive ? classes.menu__activeLink : "")}
-      >
-        <li className={classes.menu__link}>ВОЙТИ</li>
-      </NavLink>
+      {!isAuth ? (
+        <NavLink
+          to="login"
+          className={({ isActive }) =>
+            isActive ? classes.menu__activeLink : ""
+          }
+        >
+          <li className={classes.menu__link}>ВОЙТИ</li>
+        </NavLink>
+      ) : (
+        <NavLink
+          to="admin-panel"
+          className={({ isActive }) =>
+            isActive ? classes.menu__activeLink : ""
+          }
+        >
+          <li className={classes.menu__link}>АДМИН ПАНЕЛЬ</li>
+        </NavLink>
+      )}
     </ul>
   );
 };
