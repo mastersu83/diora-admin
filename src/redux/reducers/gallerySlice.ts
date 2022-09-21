@@ -1,25 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ImageTypes } from "../../types/types";
-import { getImages, getSliderImages } from "../../services/galleryAPI";
+import { ResponseImageTypes } from "../../types/types";
 
 type InitialStateType = {
-  vertical: ImageTypes[];
-  horizontal: ImageTypes[];
-  imagesIsSuccess: boolean;
+  allImages: ResponseImageTypes[];
+  vertical: ResponseImageTypes[];
+  horizontal: ResponseImageTypes[];
   title: string;
-  sliderImages: ImageTypes[];
-  sliderImagesIsSuccess: boolean;
-  previewImage: string;
+  sliderImages: ResponseImageTypes[];
+  typeOfClothing: string;
 };
 
 const initialState: InitialStateType = {
+  allImages: [],
   vertical: [],
   horizontal: [],
-  imagesIsSuccess: false,
   title: "",
   sliderImages: [],
-  sliderImagesIsSuccess: false,
-  previewImage: "",
+  typeOfClothing: "",
 };
 
 const gallerySlice = createSlice({
@@ -29,41 +26,33 @@ const gallerySlice = createSlice({
     setTitle(state: InitialStateType, action: PayloadAction<string>) {
       state.title = action.payload;
     },
-    setPreviewImage(
+    setTypeOfClothing(state: InitialStateType, action: PayloadAction<string>) {
+      state.typeOfClothing = action.payload;
+    },
+    setAllImages(
       state: InitialStateType,
-      action: PayloadAction<ImageTypes>
+      action: PayloadAction<ResponseImageTypes[]>
     ) {
-      state.previewImage = action.payload.url;
+      state.allImages = action.payload;
     },
-  },
-  extraReducers: {
-    [getImages.pending.type]: (state: InitialStateType) => {
-      state.imagesIsSuccess = false;
-    },
-    [getImages.fulfilled.type]: (
-      state: InitialStateType,
-      action: PayloadAction<ImageTypes[]>
-    ) => {
-      state.vertical = [];
+    setImages(state: InitialStateType) {
       state.horizontal = [];
-      action.payload.map((i) =>
-        i.type === 0 ? state.vertical.push(i) : state.horizontal.push(i)
+      state.vertical = [];
+      state.sliderImages = [];
+      state.vertical = state.allImages.filter(
+        (i) => Number(i.type) === 0 && i.typeOfClothing === state.typeOfClothing
       );
-      state.imagesIsSuccess = true;
-    },
-    [getSliderImages.pending.type]: (state: InitialStateType) => {
-      state.sliderImagesIsSuccess = false;
-    },
-    [getSliderImages.fulfilled.type]: (
-      state: InitialStateType,
-      action: PayloadAction<ImageTypes[]>
-    ) => {
-      state.sliderImages = action.payload;
-      state.sliderImagesIsSuccess = true;
+      state.horizontal = state.allImages.filter(
+        (i) => Number(i.type) === 1 && i.typeOfClothing === state.typeOfClothing
+      );
+      state.sliderImages = state.allImages.filter(
+        (i) => Number(i.type) === 1 && i.typeOfClothing === state.typeOfClothing
+      );
     },
   },
 });
 
-export const { setTitle, setPreviewImage } = gallerySlice.actions;
+export const { setTitle, setImages, setTypeOfClothing, setAllImages } =
+  gallerySlice.actions;
 
 export default gallerySlice;

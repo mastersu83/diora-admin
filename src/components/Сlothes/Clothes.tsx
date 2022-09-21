@@ -1,20 +1,8 @@
 import React from "react";
 import classes from "./Clothes.module.scss";
 import { Link } from "react-router-dom";
-import { getImages } from "../../services/galleryAPI";
-import { useAppDispatch } from "../../hooks/appHooks";
-import { getPathName } from "../../utils/utils";
-import { setTitle } from "../../redux/reducers/gallerySlice";
 
 const Clothes = () => {
-  const dispatch = useAppDispatch();
-
-  const getCurrentImages = (key: string) => {
-    let { title, path } = getPathName(key);
-    dispatch(getImages(path));
-    dispatch(setTitle(title));
-  };
-
   return (
     <div className={classes.clothes}>
       <p className={classes.clothes__title}>
@@ -29,7 +17,6 @@ const Clothes = () => {
           />
           <Link to="/girl-cloth">
             <button
-              onClick={() => getCurrentImages("/girl-cloth")}
               className={`${classes.clothes__girlImgBtn} ${classes.clothes__btn}`}
             >
               Для девочек
@@ -44,7 +31,6 @@ const Clothes = () => {
           />
           <Link to="/boy-cloth">
             <button
-              onClick={() => getCurrentImages("/boy-cloth")}
               className={`${classes.clothes__boyImgBtn} ${classes.clothes__btn}`}
             >
               Для мальчиков

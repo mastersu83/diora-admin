@@ -1,17 +1,21 @@
 export const getPathName = (key: string | undefined) => {
-  let path = "";
   let title = "";
+  let typeOfClothing = "";
   if (key === "/girl-cloth") {
-    path = "imagesGirl";
     title = "Комплекты на выписку для девочек";
+    typeOfClothing = "Girl";
   }
   if (key === "/boy-cloth") {
-    path = "imagesBoy";
     title = "Комплекты на выписку для мальчиков";
+    typeOfClothing = "Boy";
   }
   if (key === "/others-cloth") {
-    path = "imagesOthers";
     title = "Пледы на выписку, наборы в кровать, корзины";
+    typeOfClothing = "Others";
   }
-  return { path, title };
+  if (key === "slider") {
+    title = "Пледы на выписку, наборы в кровать, корзины";
+    typeOfClothing = "Slider";
+  }
+  return { title, typeOfClothing };
 };

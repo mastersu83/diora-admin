@@ -44,6 +44,7 @@ export const AdminForm = () => {
   return (
     <form onSubmit={sendEmail} className={classes.form__adminLogin}>
       <Input
+        input
         onChange={onChange}
         name="email"
         type="email"
@@ -51,6 +52,7 @@ export const AdminForm = () => {
         value={inputs.email}
       />
       <Input
+        input
         onChange={onChange}
         name="password"
         type="password"

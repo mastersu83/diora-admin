@@ -1,12 +1,13 @@
 export type ImageTypes = {
-  id: number;
-  type: number;
-  url: string;
+  type: string;
+  typeOfClothing: string;
+  imageUrl: string;
 };
-export type ImagesTypes = {
-  vertical: ImageTypes[];
-  horizontal: ImageTypes[];
-  title: string;
+export type ResponseImageTypes = {
+  _id: string;
+  type: string;
+  typeOfClothing: string;
+  imageUrl: string;
 };
 
 export interface IUser {

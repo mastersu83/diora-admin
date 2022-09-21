@@ -1,46 +1,57 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import classes from "./Form.module.scss";
 import { Input } from "./Input";
 import { Button } from "./Button";
-import { useUploadMutation } from "../services/galleryAPI";
+import {
+  useCreateImageMutation,
+  useRemoveFileMutation,
+  useUploadMutation,
+} from "../services/galleryAPI";
 
 export const AdminPanelForm = () => {
-  const [inputType, setInputType] = useState("0");
-  const [inputFile, setInputFile] = useState("");
+  const [inputs, setInputs] = useState({
+    type: "0",
+    typeOfClothing: "Boy",
+  });
 
-  const [upload, { data }] = useUploadMutation();
-
-  console.log(data);
+  const [upload, { data, reset }] = useUploadMutation();
+  const [createImage] = useCreateImageMutation();
+  const [removeFile] = useRemoveFileMutation();
 
   const onChangeType = (e: ChangeEvent<HTMLSelectElement>) => {
-    setInputType(e.target.value);
+    const { name, value } = e.target;
+    setInputs({ ...inputs, [name]: value });
   };
   const onChangeFile = async (e: any) => {
-    setInputFile(e.target.value);
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    await upload(formData);
+  };
+
+  const addImage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("image", e.target.files[0]);
-      upload(formData);
+      createImage({
+        type: inputs.type,
+        typeOfClothing: inputs.typeOfClothing,
+        imageUrl: data ? data.imageUrl : "",
+      });
     } catch (err) {
       console.warn(err);
       alert("Ошибка при загрузке файла");
     }
+    // setInputs({ type: "0", typeOfClothing: "Boy" });
+    reset();
   };
 
-  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // setInputs({ type: "0", imageUrl: "" });
-    localStorage.removeItem("previewImage");
+  const removeImg = () => {
+    removeFile(data ? data?.imageUrl : "");
+    reset();
   };
-
-  useEffect(() => {
-    !localStorage.getItem("previewImage") &&
-      localStorage.setItem("previewImage", data ? data?.url : "");
-  }, [data]);
 
   return (
     <form
-      onSubmit={sendEmail}
+      onSubmit={addImage}
       className={`${classes.form__adminLogin} ${classes.addImageForm}`}
     >
       <select
@@ -48,21 +59,36 @@ export const AdminPanelForm = () => {
         name="type"
         onChange={onChangeType}
       >
-        <option value="0">0</option>
-        <option value="1">1</option>
+        <option value="0">Вертикальный</option>
+        <option value="1">Горизонтаьлный</option>
       </select>
-      <Input
-        onChange={onChangeFile}
-        file
-        name="file"
-        type="file"
-        placeholder="Ваш Пароль"
-      />
-      <div className={classes.previewImage}>
-        <img
-          src={`http://localhost:5000/uploads${inputFile.split("")}`}
-          alt=""
+      <select
+        className={classes.form__input}
+        name="typeOfClothing"
+        onChange={onChangeType}
+      >
+        <option value="Boy">Мальчик</option>
+        <option value="Girl">Девочка</option>
+        <option value="Others">Конверты, Пледы, Корзины</option>
+        <option value="Slider">Слайдер</option>
+      </select>
+      <div className={classes.inputFileBox}>
+        <Input
+          onChange={onChangeFile}
+          file
+          name="file"
+          type="file"
+          placeholder="Ваш Пароль"
         />
+        {data && (
+          <button onClick={removeImg} className={classes.form__button}>
+            Удалить
+          </button>
+        )}
+      </div>
+
+      <div className={classes.previewImage}>
+        <img src={`http://localhost:5000/${data?.imageUrl}`} alt="" />
       </div>
 
       <Button text="Отправить" />

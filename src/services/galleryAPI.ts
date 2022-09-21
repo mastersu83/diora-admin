@@ -1,26 +1,5 @@
-import { ImagesTypes, ImageTypes } from "../types/types";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { ImageTypes, ResponseImageTypes } from "../types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-
-export const getImages = createAsyncThunk(
-  "gallery/getImages",
-  async (key: string | undefined) => {
-    const resp = await axios.get<ImagesTypes[]>(
-      `https://62b307d420cad3685c99a01c.mockapi.io/diorakids/${key}`
-    );
-    return resp.data;
-  }
-);
-export const getSliderImages = createAsyncThunk(
-  "gallery/getSliderImages",
-  async () => {
-    const resp = await axios.get<ImagesTypes[]>(
-      `https://62b307d420cad3685c99a01c.mockapi.io/diorakids/slider`
-    );
-    return resp.data;
-  }
-);
 
 export const galleryApi = createApi({
   reducerPath: "galleryApi",
@@ -37,14 +16,38 @@ export const galleryApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    upload: builder.mutation<ImageTypes, FormData>({
+    getAllImage: builder.query<ResponseImageTypes[], {}>({
+      query: () => ({
+        url: `images`,
+      }),
+    }),
+    upload: builder.mutation<{ imageUrl: string }, FormData>({
       query: (formData) => ({
         url: `upload`,
         method: "POST",
         body: formData,
       }),
     }),
+    removeFile: builder.mutation<{}, string>({
+      query: (imageUrl) => ({
+        url: `upload`,
+        method: "DELETE",
+        body: { imageUrl },
+      }),
+    }),
+    createImage: builder.mutation<ImageTypes[], ImageTypes>({
+      query: (image) => ({
+        url: `images`,
+        method: "POST",
+        body: image,
+      }),
+    }),
   }),
 });
 
-export const { useUploadMutation } = galleryApi;
+export const {
+  useUploadMutation,
+  useCreateImageMutation,
+  useRemoveFileMutation,
+  useGetAllImageQuery,
+} = galleryApi;

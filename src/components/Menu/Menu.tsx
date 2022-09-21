@@ -1,20 +1,11 @@
 import React from "react";
 import classes from "./Menu.module.scss";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/appHooks";
-import { getImages } from "../../services/galleryAPI";
-import { getPathName } from "../../utils/utils";
-import { setTitle } from "../../redux/reducers/gallerySlice";
+import { useAppSelector } from "../../hooks/appHooks";
 
 const Menu = () => {
-  const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
 
-  const getOthersImages = (key: string | undefined) => {
-    let { path, title } = getPathName(key);
-    dispatch(getImages(path));
-    dispatch(setTitle(title));
-  };
   return (
     <ul className={classes.menu}>
       <NavLink
@@ -30,7 +21,6 @@ const Menu = () => {
         <li className={classes.menu__link}>НАРЯДНАЯ ОДЕЖДА</li>
       </NavLink>
       <NavLink
-        onClick={() => getOthersImages("/others-cloth")}
         to="others-cloth"
         className={({ isActive }) => (isActive ? classes.menu__activeLink : "")}
       >

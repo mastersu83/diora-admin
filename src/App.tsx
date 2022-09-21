@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classes from "./App.module.scss";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Slider from "./components/Slider/Slider";
 import ClothesGallery from "./components/ClothesGallery/ClothesGallery";
@@ -12,18 +12,40 @@ import { AdminPanel } from "./components/AdminPanel/AdminPanel";
 import { useAppDispatch, useAppSelector } from "./hooks/appHooks";
 import { useAuthQuery } from "./services/authAPI";
 import { setUser } from "./redux/reducers/authSlice";
+import { useGetAllImageQuery } from "./services/galleryAPI";
+import {
+  setAllImages,
+  setImages,
+  setTitle,
+  setTypeOfClothing,
+} from "./redux/reducers/gallerySlice";
+import { getPathName } from "./utils/utils";
 
 function App() {
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const { isAuth } = useAppSelector((state) => state.auth);
 
   const { data } = useAuthQuery({});
+  const { data: images } = useGetAllImageQuery({});
 
   useEffect(() => {
-    if (data) {
+    let { title, typeOfClothing } = getPathName(
+      pathname === "/" ? "slider" : pathname
+    );
+    dispatch(setTitle(title));
+    dispatch(setTypeOfClothing(typeOfClothing));
+    dispatch(setImages());
+  }, [pathname]);
+
+  useEffect(() => {
+    if (data && images) {
       dispatch(setUser(data));
+      dispatch(setAllImages(images));
+      dispatch(setImages());
+      console.log("hello");
     }
-  }, [data, isAuth]);
+  }, [data, isAuth, images]);
 
   return (
     <div className={classes.App}>

@@ -12,7 +12,7 @@ const initialState: InitialStateType = {
 };
 
 const authSlice = createSlice({
-  name: "gallery",
+  name: "auth",
   initialState,
   reducers: {
     setUser(state: InitialStateType, action: PayloadAction<IUser>) {
