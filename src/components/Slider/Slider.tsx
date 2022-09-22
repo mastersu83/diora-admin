@@ -3,6 +3,7 @@ import classes from "./Slider.module.scss";
 import SimpleImageSlider from "react-simple-image-slider";
 import image from "../../assets/IndigoDesigns_BabyBoy_cl+(5)1.png";
 import { useAppSelector } from "../../hooks/appHooks";
+import SliderLoader from "../Loader/SliderLoader";
 
 const Slider = () => {
   const { sliderImages } = useAppSelector((state) => state.gallery);
@@ -25,7 +26,7 @@ const Slider = () => {
           slideDuration={2}
         />
       ) : (
-        "Идет загрузка..."
+        <SliderLoader />
       )}
 
       <img className={classes.slider__image} src={image} alt="BabyBoy" />

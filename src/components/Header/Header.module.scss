@@ -3,6 +3,7 @@
 .header {
   padding: 0 50px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #d8c7bd;
   &__logo {

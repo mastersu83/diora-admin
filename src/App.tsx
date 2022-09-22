@@ -43,7 +43,6 @@ function App() {
       dispatch(setUser(data));
       dispatch(setAllImages(images));
       dispatch(setImages());
-      console.log("hello");
     }
   }, [data, isAuth, images]);
 

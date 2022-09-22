@@ -13,6 +13,12 @@ const Header = () => {
           <img className={classes.header__logo} src={logo} alt="logo" />
         </Link>
       </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <span style={{ fontSize: "19px", color: "#7d4526" }}>
+          Это сайт <b>diorakids.com</b>. <br />
+          <br /> Мы переехали на <b>diorakids.ru</b>
+        </span>
+      </div>
       <div>
         <img className={classes.header__img} src={headerImg} alt="headerImg" />
         <p>8(928)22-00-633</p>
