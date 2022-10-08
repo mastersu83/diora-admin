@@ -3,8 +3,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const galleryApi = createApi({
   reducerPath: "galleryApi",
+  tagTypes: ["Images"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000/api/",
+    baseUrl: "http://185.46.11.164:5000/api/",
     prepareHeaders: (headers) => {
       headers.set(
         "Authorization",
@@ -20,6 +21,7 @@ export const galleryApi = createApi({
       query: () => ({
         url: `images`,
       }),
+      providesTags: ["Images"],
     }),
     upload: builder.mutation<{ imageUrl: string }, FormData>({
       query: (formData) => ({
@@ -27,6 +29,7 @@ export const galleryApi = createApi({
         method: "POST",
         body: formData,
       }),
+      invalidatesTags: [{ type: "Images" }],
     }),
     removeFile: builder.mutation<{}, string>({
       query: (imageUrl) => ({
@@ -34,6 +37,7 @@ export const galleryApi = createApi({
         method: "DELETE",
         body: { imageUrl },
       }),
+      invalidatesTags: [{ type: "Images" }],
     }),
     createImage: builder.mutation<ImageTypes[], ImageTypes>({
       query: (image) => ({
@@ -41,6 +45,7 @@ export const galleryApi = createApi({
         method: "POST",
         body: image,
       }),
+      invalidatesTags: [{ type: "Images" }],
     }),
   }),
 });

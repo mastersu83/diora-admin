@@ -14,7 +14,7 @@ const Header = () => {
         </Link>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <span style={{ fontSize: "19px", color: "#7d4526" }}>
+        <span>
           Это сайт <b>diorakids.com</b>. <br />
           <br /> Мы переехали на <b>diorakids.ru</b>
         </span>

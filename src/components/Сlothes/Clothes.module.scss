@@ -50,3 +50,21 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .clothes {
+    &__title {
+      font-size: 30px;
+    }
+    &__items {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 1400px) {
+  .clothes {
+    &__items {
+      width: 100%;
+    }
+  }
+}

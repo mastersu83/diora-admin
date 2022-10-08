@@ -9,7 +9,7 @@ const Slider = () => {
   const { sliderImages } = useAppSelector((state) => state.gallery);
 
   const sliderUrl = sliderImages.map(
-    (i) => "http://localhost:5000/" + i.imageUrl
+    (i) => "https://diorakids.herokuapp.com/" + i.imageUrl
   );
 
   return (

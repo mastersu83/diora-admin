@@ -19,9 +19,64 @@
     font-size: 19px;
     color: $mainColor;
   }
+  span {
+    font-size: 19px;
+    color: $mainColor;
+  }
   &__groupImg {
     position: absolute;
     top: 0;
     left: 100px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    &__groupImg {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .header {
+    &__logo {
+      width: 250px;
+    }
+    p {
+      font-size: 14px;
+    }
+    span {
+      font-size: 14px;
+    }
+    &__img {
+      width: 195px;
+    }
+    &__groupImg {
+      height: 300px;
+      left: 65px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    //display: flex;
+    //flex-direction: column;
+    &__logo {
+      width: 250px;
+    }
+    p {
+      font-size: 14px;
+    }
+    span {
+      font-size: 14px;
+    }
+    &__img {
+      width: 195px;
+    }
+    &__groupImg {
+      height: 300px;
+      left: 65px;
+    }
   }
 }

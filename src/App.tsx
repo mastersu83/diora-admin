@@ -39,15 +39,17 @@ function App() {
   }, [pathname]);
 
   useEffect(() => {
-    if (data && images) {
-      dispatch(setUser(data));
+    if (images) {
       dispatch(setAllImages(images));
-      dispatch(setImages());
     }
+    if (data) {
+      dispatch(setUser(data));
+    }
+    dispatch(setImages());
   }, [data, isAuth, images]);
 
   return (
-    <div className={classes.App}>
+    <>
       <img className={classes.bg} src={BG} alt="" />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -62,7 +64,7 @@ function App() {
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 

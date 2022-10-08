@@ -30,3 +30,30 @@
     width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .clothesGirl {
+    &__verticalItems {
+      display: flex;
+      flex-direction: column;
+    }
+    &__horizontalItems {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .clothesGirl {
+    &__verticalItems {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &__horizontalItems {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &__title {
+      font-size: 30px;
+    }
+  }
+}

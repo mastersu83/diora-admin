@@ -20,7 +20,7 @@ const ClothesGallery = () => {
                 <img
                   className={classes.clothesGirl__item}
                   key={i._id}
-                  src={`http://localhost:5000/${i.imageUrl}`}
+                  src={`https://diorakids.herokuapp.com/${i.imageUrl}`}
                   alt=""
                 />
               ))
@@ -34,7 +34,7 @@ const ClothesGallery = () => {
                 <img
                   className={classes.clothesGirl__item}
                   key={i._id}
-                  src={`http://localhost:5000/${i.imageUrl}`}
+                  src={`https://diorakids.herokuapp.com/${i.imageUrl}`}
                   alt=""
                 />
               ))

@@ -7,11 +7,8 @@
 }
 
 body {
-  font-family: "Courier New";
+  font-family: "Courier New", serif;
   color: $mainColor;
-}
-
-.App {
 }
 
 .main {
@@ -34,4 +31,10 @@ a {
   width: 100vw;
   position: fixed;
   z-index: -1;
+}
+
+@media (max-width: 1400px) {
+  .main {
+    width: 900px;
+  }
 }
