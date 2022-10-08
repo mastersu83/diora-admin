@@ -9,7 +9,9 @@ export const galleryApi = createApi({
     prepareHeaders: (headers) => {
       headers.set(
         "Authorization",
-        "e1e0407773cc4975a4f0cd365d3d469f31cdd8a245570dc5c2c8ea3984fcdac720cd5fbe753816e10a1b4ef81487d839"
+        localStorage.getItem("token")
+          ? String(localStorage.getItem("token"))
+          : ""
       );
       return headers;
     },
