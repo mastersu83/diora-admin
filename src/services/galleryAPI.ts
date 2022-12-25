@@ -5,7 +5,7 @@ export const galleryApi = createApi({
   reducerPath: "galleryApi",
   tagTypes: ["Images"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://89.108.99.40:5000/api/",
+    baseUrl: "http://localhost:5000/api/",
     prepareHeaders: (headers) => {
       headers.set(
         "Authorization",
