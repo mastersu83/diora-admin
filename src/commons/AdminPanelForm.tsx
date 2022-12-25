@@ -88,7 +88,7 @@ export const AdminPanelForm = () => {
       </div>
 
       <div className={classes.previewImage}>
-        <img src={`https://diorakids.herokuapp.com/${data?.imageUrl}`} alt="" />
+        <img src={`http://89.108.99.40:5000/${data?.imageUrl}`} alt="" />
       </div>
 
       <Button text="Отправить" />

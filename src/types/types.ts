@@ -5,7 +5,7 @@ export type ImageTypes = {
 };
 export type ResponseImageTypes = {
   _id: string;
-  type: string;
+  type: number;
   typeOfClothing: string;
   imageUrl: string;
 };

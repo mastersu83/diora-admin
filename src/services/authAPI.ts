@@ -4,7 +4,7 @@ import { IUser } from "../types/types";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://185.46.11.164:5000/api/auth/",
+    baseUrl: "http://89.108.99.40:5000/api/auth/",
     prepareHeaders: (headers) => {
       headers.set(
         "Authorization",

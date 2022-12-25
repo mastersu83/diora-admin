@@ -7,27 +7,23 @@ import ClothesGallery from "./components/ClothesGallery/ClothesGallery";
 import Clothes from "./components/Сlothes/Clothes";
 import BG from "./assets/IndigoDesigns_BabyGirl_pp+(7)1.jpg";
 import Contacts from "./components/Contacts/Contacts";
-import { AdminLogin } from "./components/AdminLogin/AdminLogin";
-import { AdminPanel } from "./components/AdminPanel/AdminPanel";
-import { useAppDispatch, useAppSelector } from "./hooks/appHooks";
-import { useAuthQuery } from "./services/authAPI";
-import { setUser } from "./redux/reducers/authSlice";
-import { useGetAllImageQuery } from "./services/galleryAPI";
+import { useAppDispatch } from "./hooks/appHooks";
 import {
-  setAllImages,
   setImages,
   setTitle,
   setTypeOfClothing,
 } from "./redux/reducers/gallerySlice";
 import { getPathName } from "./utils/utils";
+import { images } from "./constants/images";
+import { useGetAllImageQuery } from "./services/galleryAPI";
 
-function App() {
+const App = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector((state) => state.auth);
+  // const { isAuth } = useAppSelector((state) => state.auth);
 
-  const { data } = useAuthQuery({});
-  const { data: images } = useGetAllImageQuery({});
+  // const { data } = useAuthQuery({});
+  const { data } = useGetAllImageQuery({});
 
   useEffect(() => {
     let { title, typeOfClothing } = getPathName(
@@ -35,18 +31,12 @@ function App() {
     );
     dispatch(setTitle(title));
     dispatch(setTypeOfClothing(typeOfClothing));
-    dispatch(setImages());
+    dispatch(setImages(images));
   }, [pathname]);
 
   useEffect(() => {
-    if (images) {
-      dispatch(setAllImages(images));
-    }
-    if (data) {
-      dispatch(setUser(data));
-    }
-    dispatch(setImages());
-  }, [data, isAuth, images]);
+    dispatch(setImages(images));
+  }, []);
 
   return (
     <>
@@ -59,13 +49,13 @@ function App() {
           <Route path="boy-cloth" element={<ClothesGallery />} />
           <Route path="others-cloth" element={<ClothesGallery />} />
           <Route path="contact" element={<Contacts />} />
-          <Route path="login" element={<AdminLogin />} />
-          <Route path="admin-panel" element={<AdminPanel />} />
+          {/*<Route path="login" element={<AdminLogin />} />*/}
+          {/*<Route path="admin-panel" element={<AdminPanel />} />*/}
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
       </Routes>
     </>
   );
-}
+};
 
 export default App;

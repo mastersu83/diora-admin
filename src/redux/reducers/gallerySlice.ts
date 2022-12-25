@@ -35,18 +35,21 @@ const gallerySlice = createSlice({
     ) {
       state.allImages = action.payload;
     },
-    setImages(state: InitialStateType) {
+    setImages(
+      state: InitialStateType,
+      action: PayloadAction<ResponseImageTypes[]>
+    ) {
       state.horizontal = [];
       state.vertical = [];
       state.sliderImages = [];
-      state.vertical = state.allImages.filter(
-        (i) => Number(i.type) === 0 && i.typeOfClothing === state.typeOfClothing
+      state.vertical = action.payload.filter(
+        (i) => i.type === 0 && i.typeOfClothing === state.typeOfClothing
       );
-      state.horizontal = state.allImages.filter(
-        (i) => Number(i.type) === 1 && i.typeOfClothing === state.typeOfClothing
+      state.horizontal = action.payload.filter(
+        (i) => i.type === 1 && i.typeOfClothing === state.typeOfClothing
       );
-      state.sliderImages = state.allImages.filter(
-        (i) => Number(i.type) === 1 && i.typeOfClothing === state.typeOfClothing
+      state.sliderImages = action.payload.filter(
+        (i) => i.type === 1 && i.typeOfClothing === state.typeOfClothing
       );
     },
   },
