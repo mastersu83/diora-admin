@@ -1,9 +1,10 @@
 import React from "react";
 import classes from "./Menu.module.scss";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../hooks/appHooks";
 
 const Menu = () => {
-  // const { isAuth } = useAppSelector((state) => state.auth);
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   return (
     <ul className={classes.menu}>
@@ -31,25 +32,25 @@ const Menu = () => {
       >
         <li className={classes.menu__link}>КОНТАКТЫ</li>
       </NavLink>
-      {/*{!isAuth ? (*/}
-      {/*  <NavLink*/}
-      {/*    to="login"*/}
-      {/*    className={({ isActive }) =>*/}
-      {/*      isActive ? classes.menu__activeLink : ""*/}
-      {/*    }*/}
-      {/*  >*/}
-      {/*    <li className={classes.menu__link}>ВОЙТИ</li>*/}
-      {/*  </NavLink>*/}
-      {/*) : (*/}
-      {/*  <NavLink*/}
-      {/*    to="admin-panel"*/}
-      {/*    className={({ isActive }) =>*/}
-      {/*      isActive ? classes.menu__activeLink : ""*/}
-      {/*    }*/}
-      {/*  >*/}
-      {/*    <li className={classes.menu__link}>АДМИН ПАНЕЛЬ</li>*/}
-      {/*  </NavLink>*/}
-      {/*)}*/}
+      {!isAuth ? (
+        <NavLink
+          to="login"
+          className={({ isActive }) =>
+            isActive ? classes.menu__activeLink : ""
+          }
+        >
+          <li className={classes.menu__link}>ВОЙТИ</li>
+        </NavLink>
+      ) : (
+        <NavLink
+          to="admin-panel"
+          className={({ isActive }) =>
+            isActive ? classes.menu__activeLink : ""
+          }
+        >
+          <li className={classes.menu__link}>АДМИН ПАНЕЛЬ</li>
+        </NavLink>
+      )}
     </ul>
   );
 };
