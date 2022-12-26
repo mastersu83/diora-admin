@@ -8,7 +8,9 @@ import SliderLoader from "../Loader/SliderLoader";
 const Slider = () => {
   const { sliderImages } = useAppSelector((state) => state.gallery);
 
-  const sliderUrl = sliderImages.map((i) => i.imageUrl);
+  const sliderUrl = sliderImages.map(
+    (i) => "https://apidiorakids.ru/" + i.imageUrl
+  );
 
   return (
     <div className={classes.slider}>

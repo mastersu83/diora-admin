@@ -20,7 +20,7 @@ const ClothesGallery = () => {
                 <img
                   className={classes.clothesGirl__item}
                   key={i._id}
-                  src={i.imageUrl}
+                  src={`https://apidiorakids.ru/${i.imageUrl}`}
                   alt=""
                 />
               ))
@@ -34,7 +34,7 @@ const ClothesGallery = () => {
                 <img
                   className={classes.clothesGirl__item}
                   key={i._id}
-                  src={i.imageUrl}
+                  src={`https://apidiorakids.ru/${i.imageUrl}`}
                   alt=""
                 />
               ))
