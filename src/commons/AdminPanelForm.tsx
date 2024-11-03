@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import classes from "./Form.module.scss";
 import { Input } from "./Input";
+import classes from "./Form.module.scss";
 import { Button } from "./Button";
 import {
   useCreateImageMutation,
